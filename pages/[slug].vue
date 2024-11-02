@@ -15,9 +15,6 @@
           </v-card-subtitle>
           <v-card-text v-html="page?.content" class="my-3"></v-card-text>
         </v-card>
-        <div v-else>
-          <p>Page not found</p>
-        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -46,11 +43,9 @@ const page = ref([]);
 
 const slug = (await useRoute().params.slug) || "/";
 
-const  {data}  = await useFetch(async () => {
+await useFetch(async () => {
   const q = query(collection(db, "pages"), where("slug", "==", slug));
   const querySnapshot = await getDocs(q);
-  page.value = { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() }
-  console.log(data)
-  return data
+  page.value = await { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() }
 });
 </script>
