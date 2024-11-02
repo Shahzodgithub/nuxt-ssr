@@ -22,7 +22,7 @@
     </v-row>
   </v-container>
   <v-container v-else>
-    <p>Not Found</p>
+    <p>Loading ...</p>
   </v-container>
 </template>
 
