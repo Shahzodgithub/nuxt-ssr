@@ -1,12 +1,8 @@
 <template>
-  <v-container fluid v-if="data[0]">
+  <v-container fluid v-if="data">
     <Head>
       <Title>{{ data[0]?.title }}</Title>
       <Meta name="description" :content="data[0]?.title" />
-      <Style
-        type="text/css"
-        children="body { background-color: green; }"
-      ></Style>
     </Head>
     <v-row>
       <v-col>
@@ -25,6 +21,10 @@
       </v-col>
     </v-row>
   </v-container>
+  <v-container v-else>
+    <p>Not Found</p>
+  </v-container>
+  <NuxtLink to="/">Back to Homepage</NuxtLink>
 </template>
 
 <script setup lang="ts">
