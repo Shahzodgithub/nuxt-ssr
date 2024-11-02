@@ -32,6 +32,6 @@ const store = usePagesStore();
 await useAsyncData("user", () => store.fetchPages());
 
 const homePage = computed(() =>
-  store.pages.find((page) => page.slug === "home")
+  store.pages?.find((page) => page.slug === "home")
 );
 </script>
