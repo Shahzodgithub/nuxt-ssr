@@ -1,5 +1,5 @@
-import axios from "axios";
 import { defineStore, createPinia, setActivePinia } from "pinia";
+import { db } from "../firebase";
 const pinia = createPinia();
 
 export default { store: setActivePinia(pinia) };
@@ -10,8 +10,9 @@ export const usePagesStore = defineStore("page", {
   }),
   actions: {
     async fetchPages() {
-      const response = await useFetch("http://localhost:3009/pages");
-      this.pages = await response.data;
-    }
+        const snapshot = await db.ref('pages').once('value');
+        const data = snapshot.val();
+        this.pages = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+      }
   },
 });
